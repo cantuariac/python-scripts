@@ -9,6 +9,17 @@ def generate_string(lenth, charset, sd=None):
 	random.seed(sd)
 	return ''.join(random.choice(charset) for _ in range(lenth))
 
+def generate(lenth=16, seed=None, 
+			digits=True, lower=False,
+			upper=False, punctuation=False, custom=''):
+	charset = custom
+	if digits: charset += string.digits
+	if lower: charset += string.ascii_lowercase
+	if upper: charset += string.ascii_uppercase
+	if punctuation: charset += string.punctuation
+	if len(charset)==0: charset = string.printable
+	return ''.join(random.choice(charset) for _ in range(lenth))
+
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
 				description="""A simple script to generate random passwords""")
